@@ -9,8 +9,8 @@ Pastikan add pip to PATH dengan installasi pythonnya
 Kemudian, install flask
 `pip install flask`
 
-Install pula Tailwindcss
-`npm install tailwindcss`
+Install pula package lain
+`npm install dependencies`
 
 ## Run Program
 
@@ -18,7 +18,7 @@ Dalam command line, buat git clone
 `git clone https://github.com/Intermaze/Algeo02-22065`
 
 Run programmnya
-`python app.py`
+`npm run dev`
 
 Seharusnya terlihat output seperti ini
 `* Running on http://127.0.0.1:5000`
