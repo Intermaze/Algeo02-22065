@@ -6,41 +6,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Algeo 02</title>
     <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <h1 class="text-blue-600 flex justify-center text-4xl my-5 font-serif ">Reverse Image Search</h1>
-    <div class="bg-purple-400 flex flex-col items-center justify-center">
-        
-        <h2>Image Input</h2>
-        <button class="bg-white rounded">Insert an Image</button>
-        <p class="font-serif">bwganteng.png</p>
+    <h1 class="text-blue-600 flex justify-center text-4xl my-8 font-bold font-montserrat text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-500">Reverse Image Search</h1>
+    <div class="bg-purple-300 flex flex-col items-center my-4 font-montserrat font-medium">
 
-        <div class="flex flex-row bg-yellow-100 rounded">  
-            <p>Color</p>
-            <input
-                class="mr-2 mt-[0.3rem] h-3.5 w-8 appearance-none rounded-[0.4375rem] bg-neutral-300 before:pointer-events-none before:absolute before:h-3.5 before:w-3.5 before:rounded-full before:bg-transparent before:content-[''] after:absolute after:z-[2] after:-mt-[0.1875rem] after:h-5 after:w-5 after:rounded-full after:border-none after:bg-neutral-100 after:shadow-[0_0px_3px_0_rgb(0_0_0_/_7%),_0_2px_2px_0_rgb(0_0_0_/_4%)] after:transition-[background-color_0.2s,transform_0.2s] after:content-[''] checked:bg-primary checked:after:absolute checked:after:z-[2] checked:after:-mt-[3px] checked:after:ml-[1.0625rem] checked:after:h-5 checked:after:w-5 checked:after:rounded-full checked:after:border-none checked:after:bg-primary checked:after:shadow-[0_3px_1px_-2px_rgba(0,0,0,0.2),_0_2px_2px_0_rgba(0,0,0,0.14),_0_1px_5px_0_rgba(0,0,0,0.12)] checked:after:transition-[background-color_0.2s,transform_0.2s] checked:after:content-[''] hover:cursor-pointer focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[3px_-1px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-5 focus:after:w-5 focus:after:rounded-full focus:after:content-[''] checked:focus:border-primary checked:focus:bg-primary checked:focus:before:ml-[1.0625rem] checked:focus:before:scale-100 checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:bg-neutral-600 dark:after:bg-neutral-400 dark:checked:bg-primary dark:checked:after:bg-primary dark:focus:before:shadow-[3px_-1px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca]"
-                type="checkbox"
-                role="switch"
-                id="flexSwitchCheckDefault01" />
-            <p>Texture</p>
+        <div class="bg-yellow-300 flex flex-row my-5 ">
+            <p class="bg-gray-300 p-48">
+                Insert Image Here
+            </p>
+            
+            <div class="flex flex-col gap-32 items-center justify-center p-4">
+                <div>
+                    <h2 class="font-bold text-blue-600">Image Input</h2>
+                    <button class="bg-blue-500 rounded py-2 px-4 text-white">Insert an Image</button>
+                    <p class="">bwganteng.png</p>
+                </div>
+                <div class="bg-blue-300 p-2">
+                    <div class="flex flex-row bg-yellow-200 rounded p-1 text-blue-500 justify-center mb-1">  
+                        <p>Color</p>
+                        <label class="mx-4 relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" value="" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full 
+                            peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] 
+                            after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5
+                            after:transition-all peer-checked:bg-green-600"></div>
+                          </label>
+                        <p>Texture</p>
+                    </div>
+                    <button class="rounded-full text-white px-16 py-2.5 font-bold bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-500 ">Search</button>
+                </div>
+            </div>
         </div>
 
-        <button class="rounded-full bg-blue-200">Search</button>
-
-        <h2 class="text-blue-600">Result</h2>
-        <h2>54 Results in 0.57 seconds.</h2>
-
-        <div class="grid grid-cols-3 grid-rows-3 gap-5">
-            <div class="bg-blue-200 p-4">1</div>
-            <div class="bg-blue-200 p-4">2</div>
-            <div class="bg-blue-200 p-4">3</div>
-            <div class="bg-blue-200 p-4">6</div>
-            <div class="bg-blue-200 p-4">7</div>
-            <div class="bg-blue-200 p-4">8</div>
-            <div class="bg-blue-200 p-4">9</div>
-            <div class="bg-blue-200 p-4">10</div>
-            <div class="bg-blue-200 p-4">11</div>
+        <div class="flex flex-row gap-80 mb-4 bg-yellow-300 p-2">
+            <h2 class="text-blue-600 font-bold">Result:</h2>
+            <h2>54 Results in 0.57 seconds.</h2>
         </div>
+
+        <div class="grid grid-cols-3 grid-rows-3 gap-5 bg-yellow-300 p-4">
+            <div class="bg-blue-300 p-4">1</div>
+            <div class="bg-blue-300 p-4">2</div>
+            <div class="bg-blue-300 p-4">3</div>
+            <div class="bg-blue-300 p-4">6</div>
+            <div class="bg-blue-300 p-4">7</div>
+            <div class="bg-blue-300 p-4">8</div>
+            <div class="bg-blue-300 p-4">9</div>
+            <div class="bg-blue-300 p-4">10</div>
+            <div class="bg-blue-300 p-4">11</div>
+        </div>
+        <nav aria-label="Page navigation">
+            <ul class="list-style-none flex py-4">
+              <li>
+                <a
+                  class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 "
+                  href="#"
+                  >Previous</a
+                >
+              </li>
+              <li>
+                <a
+                  class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 "
+                  href="#"
+                  >1</a
+                >
+              </li>
+              <li aria-current="page">
+                <a
+                  class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 "
+                  href="#"
+                  >2</a
+                >
+              </li>
+              <li>
+                <a
+                  class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 "
+                  href="#"
+                  >3</a
+                >
+              </li>
+              <li>
+                <a
+                  class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100"
+                  href="#"
+                  >Next</a
+                >
+              </li>
+            </ul>
+        </nav>
+        <button class="rounded-full text-white px-16 py-2.5 font-bold bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-500 ">
+            Upload Dataset
+        </button>
     </div>
 </body>
 </html>
