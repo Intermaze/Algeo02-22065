@@ -7,21 +7,26 @@
     <title>Algeo 02</title>
     <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap" rel="stylesheet">
+    <script defer src="{{url_for('static',filename='main.js')}}"></script>
 
 </head>
 <body>
     <h1 class="text-blue-600 flex justify-center text-4xl my-8 font-bold font-montserrat text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-500">Reverse Image Search</h1>
-    <div class="bg-purple-300 flex flex-col items-center my-4 font-montserrat font-medium">
+    <div class="bg-gray-200 flex flex-col items-center my-4 font-montserrat font-medium">
 
         <div class="bg-yellow-300 flex flex-row my-5 ">
-            <p class="bg-gray-300 p-48">
-                Insert Image Here
-            </p>
+            <div class="bg-gray-300">
+                <img src="{{img}}">
+            </div> 
+            
             
             <div class="flex flex-col gap-32 items-center justify-center p-4">
                 <div>
                     <h2 class="font-bold text-blue-600">Image Input</h2>
-                    <button class="bg-blue-500 rounded py-2 px-4 text-white">Insert an Image</button>
+                    <form class="bg-blue-500 rounded py-2 px-4 text-white" action="{{ url_for('upload_file') }}" enctype="multipart/form-data" method="POST">
+                      <input name="img" type="file"/>
+                      <input type="submit"/>
+                    </form>
                     <p class="">bwganteng.png</p>
                 </div>
                 <div class="bg-blue-300 p-2">
@@ -96,7 +101,7 @@
               </li>
             </ul>
         </nav>
-        <button class="rounded-full text-white px-16 py-2.5 font-bold bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-500 ">
+        <button class="rounded-full text-white px-16 py-2.5 mb-4 font-bold bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-500 ">
             Upload Dataset
         </button>
     </div>
