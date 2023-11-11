@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
+import subprocess
 import os
  
 app = Flask(__name__)
@@ -17,6 +18,12 @@ def upload_file():
         img = os.path.join(app.config['UPLOAD'], filename)
         return render_template('index.html', img=img)
     return render_template('index.html')
+
+@app.route('/extract_features', methods=['POST'])
+def extract_features():
+    result = subprocess.check_output(['python', 'feature_extraction.py'], stderr=subprocess.STDOUT)
+    result = result.decode('utf-8')
+    return render_template('index.html',extracted_notice=result)
  
 if __name__ == '__main__':
     app.run(debug=True)
