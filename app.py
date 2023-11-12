@@ -14,13 +14,6 @@ upload_folder = os.path.join('static', 'uploads')
 global hsv_features
 hsv_features = load_features.load_array()
 
-try:
-    uploadedFilename
-except:
-    imgExist = False
-else:
-    imgExist = True
-
 app.config['UPLOAD'] = upload_folder
  
 @app.route('/', methods=['GET', 'POST'])
@@ -28,10 +21,13 @@ def upload_file():
     global uploadedFilename
     if request.method == 'POST':
         file = request.files['img']
-        uploadedFilename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD'], uploadedFilename))
-        img = os.path.join(app.config['UPLOAD'], uploadedFilename)
-        return render_template('index.html', img=img)
+        try:
+            uploadedFilename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD'], uploadedFilename))
+            img = os.path.join(app.config['UPLOAD'], uploadedFilename)
+            return render_template('index.html', img=img)
+        except:
+            pass
     return render_template('index.html')
 
 
