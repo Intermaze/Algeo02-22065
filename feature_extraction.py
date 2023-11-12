@@ -5,9 +5,9 @@ import time
 from extraction_func import *
 start_time = time.time()
 
-dataset_dir = 'dataset/'
+dataset_dir = 'static/dataset/'
 for images in os.listdir(dataset_dir):
-    path = 'dataset/'
+    path = 'static/dataset/'
     if (images.endswith(".png") or images.endswith(".jpg") or images.endswith(".jpeg")):
         path += str(images)
     img = Image.open(path)

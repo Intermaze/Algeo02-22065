@@ -602,6 +602,10 @@ video {
   height: 1.5rem;
 }
 
+.h-60 {
+  height: 15rem;
+}
+
 .h-96 {
   height: 24rem;
 }
@@ -779,6 +783,10 @@ video {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.align-bottom {
+  vertical-align: bottom;
 }
 
 .font-montserrat {
