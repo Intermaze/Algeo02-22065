@@ -1,6 +1,7 @@
 import numpy as np
 from PIL import Image
 import os
+import math
 from numba import njit
 
 @njit
@@ -47,7 +48,7 @@ def rgb2hsv_arr(arr):
 
 def getHistogram(filename):
     path = os.getcwd()
-    Gambar = Image.open(os.path.join(path, 'dataset/'+filename))
+    Gambar = Image.open(os.path.join(path, 'static/dataset/'+filename))
     Gambar = Gambar.resize((510,510))
 
     arr = np.array(Gambar)
@@ -196,3 +197,41 @@ def getHistogramFromUpload(filename):
     hsv9 = np.concatenate([h9b[0],s9b[0],v9b[0]])
 
     return np.array([hsv1,hsv2,hsv3,hsv4,hsv5,hsv6,hsv7,hsv8,hsv9])
+
+
+@njit
+def cosineSimiliarity(vector1, vector2):
+    AB = 0
+    lenA = 0
+    lenB = 0
+    for i in range(len(vector1)):
+        AB += vector1[i]*vector2[i]
+    for i in range(len(vector1)):
+        lenA += vector1[i]**2
+    for i in range(len(vector2)):
+        lenB += vector2[i]**2
+    lenA = math.sqrt(lenA)
+    lenB = math.sqrt(lenB)
+    return AB/(lenA*lenB)
+
+@njit
+def cosineSimilarityByColor(vecA,vecB):
+    sim_1 = cosineSimiliarity(vecA[0],vecB[0])
+    sim_2 = cosineSimiliarity(vecA[1],vecB[1])
+    sim_3 = cosineSimiliarity(vecA[2],vecB[2])
+    sim_4 = cosineSimiliarity(vecA[3],vecB[3])
+    sim_5 = cosineSimiliarity(vecA[4],vecB[4])
+    sim_6 = cosineSimiliarity(vecA[5],vecB[5])
+    sim_7 = cosineSimiliarity(vecA[6],vecB[6])
+    sim_8 = cosineSimiliarity(vecA[7],vecB[7])
+    sim_9 = cosineSimiliarity(vecA[8],vecB[8])
+    return((sim_1+sim_2+sim_3+sim_4+sim_5+sim_6+sim_7+sim_8+sim_9)/9)
+
+def colorSimilarityValueAndFilename(hsvfeatures,imghist):
+    key =[]
+    for feat in hsvfeatures:
+        similarity  = cosineSimilarityByColor(feat[0],imghist)
+        if similarity>=0.6:
+            key.append([similarity,feat[1]])
+    key.sort(reverse=True)
+    return key

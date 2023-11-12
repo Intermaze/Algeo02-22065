@@ -13,3 +13,7 @@ def load_array():
 def del_hsv():
     for item in os.listdir('dataset_features/hsv/'):
         os.remove('dataset_features/hsv/'+item)
+
+def del_texture():
+    for item in os.listdir('dataset_features/texture/'):
+        os.remove('dataset_features/texture/'+item)

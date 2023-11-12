@@ -49,11 +49,11 @@
 
         <div class="flex flex-row gap-80 mb-4 bg-yellow-300 p-2">
             <h2 class="text-blue-600 font-bold">Result:</h2>
-            <h2>54 Results in 0.57 seconds.</h2>
+            <h2>{{search_result}}</h2>
         </div>
 
         <div class="grid grid-cols-3 grid-rows-3 gap-5 bg-yellow-300 p-4">
-            <div class="bg-blue-300 p-4">1</div>
+            <!-- <div class="bg-blue-300 p-4">1</div>
             <div class="bg-blue-300 p-4">2</div>
             <div class="bg-blue-300 p-4">3</div>
             <div class="bg-blue-300 p-4">6</div>
@@ -61,7 +61,11 @@
             <div class="bg-blue-300 p-4">8</div>
             <div class="bg-blue-300 p-4">9</div>
             <div class="bg-blue-300 p-4">10</div>
-            <div class="bg-blue-300 p-4">11</div>
+            <div class="bg-blue-300 p-4">11</div> -->
+            {% for item in key %}
+            <img src='static/dataset/{{item[1]}}' class="h-60">
+            <figcaption class="align-bottom">{{item[0]}}</figcaption>
+            {% endfor %}
         </div>
         <nav aria-label="Page navigation">
             <ul class="list-style-none flex py-4">
