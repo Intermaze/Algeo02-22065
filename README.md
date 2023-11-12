@@ -6,11 +6,11 @@ Tugas Besar 2 Aljabar dan Linear Geometri FK ITB
 Install Python version 3.11.6: https://www.python.org/downloads/
 Pastikan add pip to PATH dengan installasi pythonnya
 
-Kemudian, install flask
-`pip install flask`
+Kemudian, library yang digunakan python
+`pip install -r requirements.txt`
 
 Install pula package lain
-`npm install dependencies`
+`npm install`
 
 ## Run Program
 

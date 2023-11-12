@@ -13,7 +13,6 @@ upload_folder = os.path.join('static', 'uploads')
 # Loading pre-processed features
 global hsv_features
 hsv_features = load_features.load_array()
-print(hsv_features)
 
 try:
     uploadedFilename
@@ -43,8 +42,6 @@ def extract_features():
     result = subprocess.check_output(['python', 'feature_extraction.py'], stderr=subprocess.STDOUT)
     result = result.decode('utf-8')
     hsv_features = load_features.load_array()
-    print(hsv_features)
-    print("NORMAL")
     return render_template('index.html',extracted_notice=result)
 
 @app.route('/image_color_search', methods=['GET','POST'])
