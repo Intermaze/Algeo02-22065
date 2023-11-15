@@ -626,6 +626,10 @@ video {
   max-height: 10rem;
 }
 
+.max-h-60 {
+  max-height: 15rem;
+}
+
 .w-11 {
   width: 2.75rem;
 }
@@ -838,12 +842,31 @@ video {
   line-height: 1.25rem;
 }
 
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
 
 .font-medium {
   font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
 }
 
 .text-black {
