@@ -20,13 +20,9 @@ window.onload = function() {
 
 function searchColorOrTexture() {
     if(document.getElementById("ColorTextureToggle").checked){
-        document.getElementById("Searchbar").onclick=function(){
-            location.href='/image_texture_search';
-        };
+        location.href='/image_texture_search';
     }
     else{
-        document.getElementById("Searchbar").onclick=function(){
-            location.href='/image_color_search';
-        };
+        location.href='/image_color_search';
     }
 }
