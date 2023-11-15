@@ -8,6 +8,7 @@
     <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap" rel="stylesheet">
     <script src="../static/script/script.js"></script>
+    <script defer src="../static/script/pagination.js"
     <script defer src="{{url_for('static',filename='main.js')}}"></script>
 
 </head>
@@ -15,7 +16,7 @@
     <h1 class="text-blue-600 flex justify-center text-4xl my-8 font-bold font-montserrat text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-500">Reverse Image Search</h1>
     <div class="bg-gray-200 flex flex-col items-center my-4 font-montserrat font-medium">
 
-        <div class="bg-yellow-300 flex flex-row my-5 ">
+        <div class="bg-blue-200 flex flex-row my-5 ">
             <div class="bg-gray-300 h-96">
                 <img src="{{img}}" class="h-full">
             </div> 
@@ -24,14 +25,14 @@
             <div class="flex flex-col gap-32 items-center justify-center p-4">
                 <div>
                     <h2 class="font-bold text-blue-600">Image Input</h2>
-                    <form class="bg-blue-500 rounded py-2 px-4 text-white" action="{{ url_for('upload_file') }}" enctype="multipart/form-data" method="POST">
-                      <input name="img" type="file"/>
+                    <form action="{{ url_for('upload_file') }}" enctype="multipart/form-data" method="POST">
+                      <input class="bg-blue-500 rounded py-2 px-4 text-white" name="img" type="file"/>
                       <input type="submit"/>
                     </form>
                     <p class="">bwganteng.png</p>
                 </div>
                 <div class="bg-blue-300 p-2 rounded-xl">
-                    <div class="flex flex-row bg-yellow-200 rounded p-1 text-blue-500 justify-center mb-1">  
+                    <div class="flex flex-row bg-blue-500 rounded p-1 text-white justify-center mb-1">  
                         <p>Color</p>
                         <label class="mx-4 relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" value="" class="sr-only peer" id="ToggleMode">
@@ -47,63 +48,77 @@
             </div>
         </div>
 
-        <div class="flex flex-row gap-80 mb-4 bg-yellow-300 p-2">
+        <div class="flex flex-row gap-80 mb-4 bg-blue-200 p-2 text-xl">
             <h2 class="text-blue-600 font-bold">Result:</h2>
-            <h2>{{search_result}}</h2>
+            <h2 class="text-blue-600">{{search_result}}</h2>
         </div>
-
-        <div class="grid grid-cols-3 grid-rows-3 gap-5 bg-yellow-300 p-4">
-            <!-- <div class="bg-blue-300 p-4">1</div>
-            <div class="bg-blue-300 p-4">2</div>
-            <div class="bg-blue-300 p-4">3</div>
-            <div class="bg-blue-300 p-4">6</div>
-            <div class="bg-blue-300 p-4">7</div>
-            <div class="bg-blue-300 p-4">8</div>
-            <div class="bg-blue-300 p-4">9</div>
-            <div class="bg-blue-300 p-4">10</div>
-            <div class="bg-blue-300 p-4">11</div> -->
-            {% for item in key %}
-            <img src='static/dataset/{{item[1]}}' class="h-60">
-            <figcaption class="align-bottom">{{item[0]}}</figcaption>
-            {% endfor %}
-        </div>
+        <script>
+          var mappingKey = {{key|safe}};
+          // var keysJS = Array.from(JSON.parse(keys));
+        </script>
+        <section class="grid grid-rows-3 grid-cols-3 gap-5 bg-blue-200 p-4 galer invisible">
+            <div class="bg-blue-200 text-center">
+              <img src="" id="img1" class="max-h-60 p-2">
+              <figcaption id="capt1" class="text-blue-800"></figcaption>
+            </div>
+            <div class="bg-blue-200 text-center">
+              <img src="" id="img2" class="max-h-60 p-2">
+              <figcaption id="capt2" class="text-blue-800"></figcaption>
+            </div>
+            <div class="bg-blue-200 text-center">
+              <img src="" id="img3" class="max-h-60 p-2">
+              <figcaption id="capt3" class="text-blue-800"></figcaption>
+            </div>
+            <div class="bg-blue-200 text-center">
+              <img src="" id="img4" class="max-h-60 p-2">
+              <figcaption id="capt4" class="text-blue-800"></figcaption>
+            </div>
+            <div class="bg-blue-200 text-center">
+              <img src="" id="img5" class="max-h-60 p-2">
+              <figcaption id="capt5" class="text-blue-800"></figcaption>
+            </div>
+            <div class="bg-blue-200 text-center">
+              <img src="" id="img6" class="max-h-60 p-2">
+              <figcaption id="capt6" class="text-blue-800"></figcaption>
+            </div>
+            <div class="bg-blue-200 text-center">
+              <img src="" id="img7" class="max-h-60 p-2">
+              <figcaption id="capt7" class="text-blue-800"></figcaption>
+            </div>
+            <div class="bg-blue-200 text-center">
+              <img src="" id="img8" class="max-h-60 p-2">
+              <figcaption id="capt8" class="text-blue-800"></figcaption>
+            </div>
+            <div class="bg-blue-200 text-center">
+              <img src="" id="img9" class="max-h-60 p-2">
+              <figcaption id="capt9" class="text-blue-800"></figcaption>
+            </div>
+          <!-- {% for item in key %}
+          <div class="container_image">
+            <div class="flex flex-col items-center galer_item"> 
+              <div class="img_item">
+                <img src='static/dataset/{{item[1]}}' class="h-32">
+                <figcaption class="align-bottom text-blue-800">{{item[0]}}%</figcaption>
+              </div>
+            </div>
+          </div>
+          {% endfor %} -->
+        </section>
         <nav aria-label="Page navigation">
             <ul class="list-style-none flex py-4">
-              <li>
-                <a
-                  class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 "
-                  href="#"
-                  >Previous</a
-                >
-              </li>
-              <li>
-                <a
-                  class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 "
-                  href="#"
-                  >1</a
-                >
-              </li>
-              <li aria-current="page">
-                <a
-                  class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 "
-                  href="#"
-                  >2</a
-                >
-              </li>
-              <li>
-                <a
-                  class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 "
-                  href="#"
-                  >3</a
-                >
-              </li>
-              <li>
-                <a
-                  class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100"
-                  href="#"
-                  >Next</a
-                >
-              </li>
+              <div class="flex flex-col items-center text-sm text-black invisible pagenav">
+                Page
+                <span class="text-sm text-black pagenum">   
+                </span>
+                <div class="inline-flex mt-2 xs:mt-0">
+                    <button class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gradient-to-r from-indigo-600 to bg-purple-500 rounded-s hover:bg-gray-900 dark:hover:bg-gray-700 dark:hover:text-white Prev">
+                        Prev
+                    </button>
+                    <button class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gradient-to-l from-indigo-600 to bg-purple-500 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900  dark:hover:bg-gray-700 dark:hover:text-white Next">
+                        Next
+                    </button>
+                </div>
+              </div>
             </ul>
         </nav>
         <button class="rounded-full text-white px-16 py-2.5 mb-4 font-bold bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-500 ">

@@ -232,6 +232,6 @@ def colorSimilarityValueAndFilename(hsvfeatures,imghist):
     for feat in hsvfeatures:
         similarity  = cosineSimilarityByColor(feat[0],imghist)
         if similarity>=0.6:
-            key.append([similarity,feat[1]])
+            key.append([round(similarity*100,3),feat[1]])
     key.sort(reverse=True)
     return key
