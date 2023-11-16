@@ -236,50 +236,43 @@ def colorSimilarityValueAndFilename(hsvfeatures,imghist):
     key.sort(reverse=True)
     return key
 
-def createGrayscale(image):     # Convert RGB image to grayscale
-    converted_img = image.convert("RGB") # matrix rgb image
-    numpydata = np.array(converted_img)
-    matrix_grayscale_temp = [[0 for i in range (numpydata.shape[0])] for j in range (numpydata.shape[1])]    # Initialitation matrix for grayscale
-    for i in range (numpydata.shape[0]):    # Convert rgb matrix to grayscale matrix
-        for j in range (numpydata.shape[1]):
-            matrix_grayscale_temp[i][j] = int(0.299*numpydata[i][j][0] + 0.587*numpydata[i][j][1] + 0.114*numpydata[i][j][2])
-    matrix_grayscale = np.array(matrix_grayscale_temp)
-    return matrix_grayscale
+@njit
+def rgbtograyscale(r,g,b):
+    return 0.29*r+0.587*g+0.114*b
 
-def createGLCM(matrixGrayscale):    # Convert grayscale to GLCM
-    glcm_matrix = [[0 for i in range (256)] for j in range (256)]
-    for i in range (matrixGrayscale.shape[0]):
-        for j in range (1, matrixGrayscale.shape[1]):
-            glcm_matrix[matrixGrayscale[i][j-1]][matrixGrayscale[i][j]] += 1
-    return glcm_matrix
+@njit
+def rgbtograyscale_array(array):
+    return [[int(rgbtograyscale(i[0],i[1],i[2])) for i in j] for j in array]
 
-def createSymmetric(glcm):  # Convert GLCM to symmetric
-    glcm_transpose = np.transpose(glcm)
-    symmetric_matrix = glcm + glcm_transpose
-    return symmetric_matrix
+@njit
+def GCLMMat(data):
+    size = data.max()
+    framework = np.zeros((size,size))
+    for i in range(0,len(data)):
+        for j in range(0,len(data[0])-1):
+            framework[data[i][j]-1][data[i][j+1]-1] += 1
+    return framework
 
-def createMatrixNorm(symmetricMatrix):  # Convert symmetric to normalized
-    sum_glcm_val = np.sum(symmetricMatrix)
-    matrix_norm = [[0 for i in range (symmetricMatrix.shape[0])] for j in range (symmetricMatrix.shape[1])]
-    for i in range (len(matrix_norm)):
-        for j in range (len(matrix_norm[0])):
-            matrix_norm[i][j] = float(symmetricMatrix[i][j]/sum_glcm_val)
-    return matrix_norm
+@njit
+def symmetricGCLM(gclmmatrix):
+    transposed = gclmmatrix.transpose()
+    framework = transposed+gclmmatrix
+    return framework
 
+@njit
+def normalizeGCLM(gclmmatrix):
+    sum_content = gclmmatrix.sum()
+    return gclmmatrix*(1/sum_content)
+
+@njit
 def createThreeFeature(matrixNorm):     # Create contrast, homogeneity, and entropy from normalize matrix
     contrast = 0
-    for i in range (len(matrixNorm)):
-        for j in range (len(matrixNorm[0])):
-            contrast = float(contrast + matrixNorm[i][j]*(i-j)*(i-j))
-
     homogeneity = 0
-    for i in range (len(matrixNorm)):
-        for j in range (len(matrixNorm[0])):
-            homogeneity = float(homogeneity + (matrixNorm[i][j]/(1+(i-j)*(i-j))))
-
     entropy = 0
     for i in range (len(matrixNorm)):
         for j in range (len(matrixNorm[0])):
+            contrast = float(contrast + matrixNorm[i][j]*(i-j)*(i-j))
+            homogeneity = float(homogeneity + (matrixNorm[i][j]/(1+(i-j)*(i-j))))
             if matrixNorm[i][j] != 0:
                 entropy = float(entropy + (matrixNorm[i][j]*(math.log(matrixNorm[i][j]))))
     entropy *= -1
@@ -288,29 +281,29 @@ def createThreeFeature(matrixNorm):     # Create contrast, homogeneity, and entr
 def getTextureFeature(filename):    
     path = os.getcwd()
     image = Image.open(os.path.join(path, 'static/dataset/'+filename))
-
-    dataset_grayscale_matrix = createGrayscale(image)
-    dataset_glcm_matrix = createGLCM(dataset_grayscale_matrix)
-    dataset_symmetric_matrix = createSymmetric(dataset_glcm_matrix)
-    dataset_normalized_matrix = createMatrixNorm(dataset_symmetric_matrix)
+    image = np.array(image)
+    dataset_grayscale_matrix = np.array(rgbtograyscale_array(image))
+    dataset_glcm_matrix = GCLMMat(dataset_grayscale_matrix)
+    dataset_symmetric_matrix = symmetricGCLM(dataset_glcm_matrix)
+    dataset_normalized_matrix = normalizeGCLM(dataset_symmetric_matrix)
     dataset_feature = createThreeFeature(dataset_normalized_matrix)
     return dataset_feature
 
 def getTextureFeatureFromUpload(filename):
     path = os.getcwd()
     image = Image.open(os.path.join(path, 'static/uploads/'+filename))
-
-    dataset_grayscale_matrix = createGrayscale(image)
-    dataset_glcm_matrix = createGLCM(dataset_grayscale_matrix)
-    dataset_symmetric_matrix = createSymmetric(dataset_glcm_matrix)
-    dataset_normalized_matrix = createMatrixNorm(dataset_symmetric_matrix)
+    image = np.array(image)
+    dataset_grayscale_matrix = np.array(rgbtograyscale_array(image))
+    dataset_glcm_matrix = GCLMMat(dataset_grayscale_matrix)
+    dataset_symmetric_matrix = symmetricGCLM(dataset_glcm_matrix)
+    dataset_normalized_matrix = normalizeGCLM(dataset_symmetric_matrix)
     dataset_feature = createThreeFeature(dataset_normalized_matrix)
     return dataset_feature
 
 def getAllCosineSimiliarity(dataset_texture_features, main_img):
     key =[]
     for feat in dataset_texture_features:
-        similarity  = cosineSimilarityByColor(feat[0],main_img)
+        similarity  = cosineSimiliarity(feat[0],main_img)
         if similarity>=0.6:
             key.append([round(similarity*100,3),feat[1]])
     key.sort(reverse=True)
