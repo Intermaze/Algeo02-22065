@@ -36,10 +36,13 @@ def upload_file():
 @app.route('/extract_features', methods=['GET', 'POST'])
 def extract_features():
     global hsv_features
+    global texture_features
     load_features.del_hsv()
+    load_features.del_texture()
     result = subprocess.check_output(['python', 'feature_extraction.py'], stderr=subprocess.STDOUT)
     result = result.decode('utf-8')
-    hsv_features = load_features.load_array()
+    texture_features = load_features.load_array_texture()
+    hsv_features = load_features.load_array_hsv()
     return render_template('index.html',extracted_notice=result)
 
 @app.route('/image_color_search', methods=['GET','POST'])

@@ -258,6 +258,7 @@ def createSymmetric(glcm):  # Convert GLCM to symmetric
     symmetric_matrix = glcm + glcm_transpose
     return symmetric_matrix
 
+@njit
 def createMatrixNorm(symmetricMatrix):  # Convert symmetric to normalized
     sum_glcm_val = np.sum(symmetricMatrix)
     matrix_norm = [[0 for i in range (symmetricMatrix.shape[0])] for j in range (symmetricMatrix.shape[1])]
@@ -310,7 +311,7 @@ def getTextureFeatureFromUpload(filename):
 def getAllCosineSimiliarity(dataset_texture_features, main_img):
     key =[]
     for feat in dataset_texture_features:
-        similarity  = cosineSimilarityByColor(feat[0],main_img)
+        similarity  = cosineSimiliarity(feat[0],main_img)
         if similarity>=0.6:
             key.append([round(similarity*100,3),feat[1]])
     key.sort(reverse=True)
