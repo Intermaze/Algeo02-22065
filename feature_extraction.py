@@ -12,8 +12,11 @@ for images in os.listdir(dataset_dir):
         path += str(images)
     img = Image.open(path)
     HIST = getHistogram(images)
-    namafile = "dataset_features/hsv/"+images+".npy"
-    np.save(namafile,HIST)
+    TextureFeature = getTextureFeature(images)
+    namafile_color = "dataset_features/hsv/"+images+".npy"
+    namafile_texture = "dataset_features/texture/"+images+".npy"
+    np.save(namafile_color,HIST)
+    np.save(namafile_texture, TextureFeature)
 
 img_count = len(os.listdir(dataset_dir))
 end_time = time.time()

@@ -12,7 +12,9 @@ upload_folder = os.path.join('static', 'uploads')
 
 # Loading pre-processed features
 global hsv_features
-hsv_features = load_features.load_array()
+global texture_features
+hsv_features = load_features.load_array_hsv()
+texture_features = load_features.load_array_texture()
 
 app.config['UPLOAD'] = upload_folder
  
@@ -48,6 +50,21 @@ def image_color_search():
     img = os.path.join(app.config['UPLOAD'], uploadedFilename)
     imgHist = extraction_func.getHistogramFromUpload(uploadedFilename)
     key = extraction_func.colorSimilarityValueAndFilename(hsv_features,imgHist)
+    end_time = time.time()
+    timer = end_time-start_time
+    timer = round(timer,3)
+    search_result = str(len(key))+" results in "+str(timer)+" seconds"
+    # search_result = search_result.decode('utf-8')
+    return render_template('index.html',key=key,img=img,search_result=search_result)
+
+@app.route('/image_texture_search', methods=['GET','POST'])
+def image_texture_search():
+    global texture_features
+    global uploadedFilename
+    start_time = time.time()
+    img = os.path.join(app.config['UPLOAD'], uploadedFilename)
+    imgTexture = extraction_func.getTextureFeatureFromUpload(uploadedFilename)
+    key = extraction_func.getAllCosineSimiliarity(texture_features, imgTexture)
     end_time = time.time()
     timer = end_time-start_time
     timer = round(timer,3)
