@@ -25,7 +25,7 @@
             <div class="flex flex-col gap-32 items-center justify-center p-4">
                 <div>
                     <h2 class="font-bold text-blue-600">Image Input</h2>
-                    <form action="{{ url_for('upload_inputs') }}" enctype="multipart/form-data" method="POST" id="uploadForm">
+                    <form action="{{ url_for('upload_datasets') }}" enctype="multipart/form-data" method="POST" id="uploadForm">
                       <div class="flex flex-col">
                         <div class="inline-block relative">
                           <input class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" name="img" type="file" id="fileInput" onchange="submitForm()"/>
@@ -45,9 +45,9 @@
                             <div class="w-11 h-6 bg-blue-700 rounded-full peer peer-checked:after:translate-x-full 
                             peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] 
                             after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5
-                            after:transition-all peer-checked:bg-purple-700"></div>
+                            after:transition-all peer-checked:bg-purple-500"></div>
                           </label>
-                        <p class="text-purple-700 font-semibold">Texture</p>
+                        <p class="text-purple-600 font-semibold">Texture</p>
                     </div>
                     <button onclick="searchColorOrTexture()" id="Searchbar" class="rounded-full text-white px-16 py-2.5 font-bold bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-500 hover:opacity-90 transition-all">Search</button>
                 </div>
@@ -112,14 +112,10 @@
         </section>
         <nav aria-label="Page navigation">
             <ul class="list-style-none flex py-4">
-              <div class="flex flex-col items-center text-lg font-medium text-blue-950 invisible pagenav">
+              <div class="flex flex-col items-center text-sm text-black invisible pagenav">
                 Page
-                <div class="inline-block">
-                  <span class="text-lg font-medium text-blue-950 pagepos" contenteditable="true" id="skip" type="number">   
-                  </span>
-                  <span class="text-lg font-medium text-blue-950 pagenum">   
-                  </span>
-                </div>
+                <span class="text-sm text-black pagenum">   
+                </span>
                 <div class="inline-flex mt-2 xs:mt-0">
                     <button class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gradient-to-r from-indigo-600 to bg-purple-500 rounded-s hover:bg-gray-900 dark:hover:bg-gray-700 dark:hover:text-white Prev">
                         Prev

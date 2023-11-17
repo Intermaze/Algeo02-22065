@@ -8,16 +8,18 @@ import time
  
 app = Flask(__name__)
  
-upload_folder = os.path.join('static', 'uploads')
+upload_input = os.path.join('static', 'uploads')
+upload_dataset = os.path.join('static', 'dataset')
 
 # Loading pre-processed features
 global hsv_features
-hsv_features = load_features.load_array()
+#hsv_features = load_features.load_array()
 
-app.config['UPLOAD'] = upload_folder
+app.config['UPLOAD'] = upload_input
+app.config['DATASET'] = upload_dataset
  
 @app.route('/', methods=['GET', 'POST'])
-def upload_file():
+def upload_inputs():
     global uploadedFilename
     if request.method == 'POST':
         file = request.files['img']
@@ -30,6 +32,23 @@ def upload_file():
             pass
     return render_template('index.html')
 
+@app.route('/dataset', methods=['GET', 'POST'])
+def upload_datasets():
+    global uploadedFilename
+    if request.method == 'POST':
+        file = request.files['img']
+        try:
+            uploadedFilename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['DATASET'], uploadedFilename))
+            img = os.path.join(app.config['DATASET'], uploadedFilename)
+            return render_template('dataset.html', img=img)
+        except:
+            pass
+    return render_template('dataset.html')
+
+@app.route('/about_page', methods=['GET', 'POST'])
+def about_page():
+    return render_template('about_page.html')
 
 @app.route('/extract_features', methods=['GET', 'POST'])
 def extract_features():
