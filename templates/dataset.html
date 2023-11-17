@@ -25,7 +25,7 @@
             <div class="flex flex-col gap-32 items-center justify-center p-4">
                 <div>
                     <h2 class="font-bold text-blue-600">Image Input</h2>
-                    <form action="{{ url_for('upload_inputs') }}" enctype="multipart/form-data" method="POST" id="uploadForm">
+                    <form action="{{ url_for('upload_datasets') }}" enctype="multipart/form-data" method="POST" id="uploadForm">
                       <div class="flex flex-col">
                         <div class="inline-block relative">
                           <input class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" name="img" type="file" id="fileInput" onchange="submitForm()"/>

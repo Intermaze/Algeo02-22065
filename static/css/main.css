@@ -554,6 +554,10 @@ video {
   position: static;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -562,8 +566,28 @@ video {
   position: relative;
 }
 
+.sticky {
+  position: sticky;
+}
+
 .inset-0 {
   inset: 0px;
+}
+
+.right-0 {
+  right: 0px;
+}
+
+.top-0 {
+  top: 0px;
+}
+
+.left-0 {
+  left: 0px;
+}
+
+.z-20 {
+  z-index: 20;
 }
 
 .mx-4 {
@@ -646,14 +670,6 @@ video {
   width: 100%;
 }
 
-.max-w-\[512px\] {
-  max-width: 512px;
-}
-
-.max-w-\[550px\] {
-  max-width: 550px;
-}
-
 .max-w-\[600px\] {
   max-width: 600px;
 }
@@ -686,6 +702,10 @@ video {
   justify-content: center;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
 .gap-32 {
   gap: 8rem;
 }
@@ -696,10 +716,6 @@ video {
 
 .gap-80 {
   gap: 20rem;
-}
-
-.gap-4 {
-  gap: 1rem;
 }
 
 .rounded {
@@ -843,16 +859,22 @@ video {
   padding-bottom: 1rem;
 }
 
+.px-7 {
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
 .text-center {
   text-align: center;
 }
 
 .text-justify {
   text-align: justify;
-}
-
-.indent-3 {
-  text-indent: 0.75rem;
 }
 
 .indent-4 {
@@ -1037,5 +1059,31 @@ video {
   .dark\:hover\:text-white:hover {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .lg\:py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .xl\:px-16 {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .\32xl\:px-24 {
+    padding-left: 6rem;
+    padding-right: 6rem;
   }
 }
