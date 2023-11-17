@@ -235,3 +235,76 @@ def colorSimilarityValueAndFilename(hsvfeatures,imghist):
             key.append([round(similarity*100,3),feat[1]])
     key.sort(reverse=True)
     return key
+
+@njit
+def rgbtograyscale(r,g,b):
+    return 0.29*r+0.587*g+0.114*b
+
+@njit
+def rgbtograyscale_array(array):
+    return [[int(rgbtograyscale(i[0],i[1],i[2])) for i in j] for j in array]
+
+@njit
+def GCLMMat(data):
+    size = data.max()
+    framework = np.zeros((size,size))
+    for i in range(0,len(data)):
+        for j in range(0,len(data[0])-1):
+            framework[data[i][j]-1][data[i][j+1]-1] += 1
+    return framework
+
+@njit
+def symmetricGCLM(gclmmatrix):
+    transposed = gclmmatrix.transpose()
+    framework = transposed+gclmmatrix
+    return framework
+
+@njit
+def normalizeGCLM(gclmmatrix):
+    sum_content = gclmmatrix.sum()
+    return gclmmatrix*(1/sum_content)
+
+@njit
+def createThreeFeature(matrixNorm):     # Create contrast, homogeneity, and entropy from normalize matrix
+    contrast = 0
+    homogeneity = 0
+    entropy = 0
+    for i in range (len(matrixNorm)):
+        for j in range (len(matrixNorm[0])):
+            contrast = float(contrast + matrixNorm[i][j]*(i-j)*(i-j))
+            homogeneity = float(homogeneity + (matrixNorm[i][j]/(1+(i-j)*(i-j))))
+            if matrixNorm[i][j] != 0:
+                entropy = float(entropy + (matrixNorm[i][j]*(math.log(matrixNorm[i][j]))))
+    entropy *= -1
+    return [contrast, homogeneity, entropy]
+
+def getTextureFeature(filename):    
+    path = os.getcwd()
+    image = Image.open(os.path.join(path, 'static/dataset/'+filename))
+    image = np.array(image)
+    dataset_grayscale_matrix = np.array(rgbtograyscale_array(image))
+    dataset_glcm_matrix = GCLMMat(dataset_grayscale_matrix)
+    dataset_symmetric_matrix = symmetricGCLM(dataset_glcm_matrix)
+    dataset_normalized_matrix = normalizeGCLM(dataset_symmetric_matrix)
+    dataset_feature = createThreeFeature(dataset_normalized_matrix)
+    return dataset_feature
+
+def getTextureFeatureFromUpload(filename):
+    path = os.getcwd()
+    image = Image.open(os.path.join(path, 'static/uploads/'+filename))
+    image = np.array(image)
+    dataset_grayscale_matrix = np.array(rgbtograyscale_array(image))
+    dataset_glcm_matrix = GCLMMat(dataset_grayscale_matrix)
+    dataset_symmetric_matrix = symmetricGCLM(dataset_glcm_matrix)
+    dataset_normalized_matrix = normalizeGCLM(dataset_symmetric_matrix)
+    dataset_feature = createThreeFeature(dataset_normalized_matrix)
+    return dataset_feature
+
+def getAllCosineSimiliarity(dataset_texture_features, main_img):
+    key =[]
+    for feat in dataset_texture_features:
+        similarity  = cosineSimiliarity(feat[0],main_img)
+        if similarity>=0.6:
+            key.append([round(similarity*100,3),feat[1]])
+    key.sort(reverse=True)
+    return key
