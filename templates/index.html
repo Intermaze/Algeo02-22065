@@ -99,16 +99,6 @@
               <img src="" id="img9" class="max-h-40 p-2">
               <figcaption id="capt9" class="text-blue-800"></figcaption>
             </div>
-          <!-- {% for item in key %}
-          <div class="container_image">
-            <div class="flex flex-col items-center galer_item"> 
-              <div class="img_item">
-                <img src='static/dataset/{{item[1]}}' class="h-32">
-                <figcaption class="align-bottom text-blue-800">{{item[0]}}%</figcaption>
-              </div>
-            </div>
-          </div>
-          {% endfor %} -->
         </section>
         <nav aria-label="Page navigation">
             <ul class="list-style-none flex py-4">
@@ -131,14 +121,23 @@
               </div>
             </ul>
         </nav>
-        <button class="rounded-full text-white px-16 py-2.5 mb-4 font-bold bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-500 ">
-            Upload Dataset
-        </button>
-        <form id="extractFeaturesForm" action="{{ url_for('extract_features') }}" method="post">
+
+        <!-- <form id="extractFeaturesForm" action="{{ url_for('extract_features') }}" method="POST">
         <button type="button" onclick="extractFeatures()" class="rounded-full text-white px-16 py-2.5 mb-4 font-bold bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-500 ">
           Extract Dataset
       </button>
-    </form>
+    </form> -->
+    <form action = "/extract_features" method="POST" enctype="multipart/form-data">
+      <div class="flex flex-col">
+        <div class="inline-block relative px-16 py-2.5 mb-4 bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-500 hover:opacity-90 rounded-xl">
+      <input type="file" name="file" webkitdirectory directory multiple class=" absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="this.form.submit()" />
+      <button class="rounded-full text-white font-bold">
+        Upload Dataset
+      </button>
+      </div>
+      </div>
+    </form> 
+    <br>
     <p>{{extracted_notice}}</p>
     </div>
 </body>

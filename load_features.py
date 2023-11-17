@@ -19,6 +19,10 @@ def load_array_texture():
         array_of_texture_features.append([feat,features[:-4]])
     return array_of_texture_features
 
+def del_image():
+    for item in os.listdir('static/dataset/'):
+        os.remove('static/dataset/'+item)
+
 def del_hsv():
     for item in os.listdir('dataset_features/hsv/'):
         os.remove('dataset_features/hsv/'+item)
