@@ -12,7 +12,7 @@ upload_folder = os.path.join('static', 'uploads')
 
 # Loading pre-processed features
 global hsv_features
-hsv_features = load_features.load_array()
+#hsv_features = load_features.load_array()
 
 app.config['UPLOAD'] = upload_folder
  
@@ -30,6 +30,9 @@ def upload_file():
             pass
     return render_template('index.html')
 
+@app.route('/about_page', methods=['GET', 'POST'])
+def about_page():
+    return render_template('about_page.html')
 
 @app.route('/extract_features', methods=['GET', 'POST'])
 def extract_features():

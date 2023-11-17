@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse Image Search</title>
+    <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap" rel="stylesheet">
+    <script src="../static/script/script.js"></script>
+
+</head>
+<body>
+    <h1 class="text-blue-600 flex justify-center text-4xl my-8 font-bold font-montserrat text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-500">Reverse Image Search</h1>
+    <div class="bg-gray-200 flex flex-col items-center my-4 font-montserrat font-medium">
+
+        <div class="bg-blue-200 my-5 flex flex-col ">
+			<h2 class="font-semibold text-center">Cari gambar yang mirip gimana puh?</h2>
+			<p class="indent-4 text-justify">Website ini menggunakan Content-Based Information Retrieval (CBIR), <br>
+				proses yang mencari konten-konten pada gambar dan mengambilnya. <br>
+				Konten ini bisa berupa warna, tekstur, dan bentuk. 
+				Ada dua paramater<br> yang diambil pada website ini, yaitu parameter Warna dan Tekstur.
+			</p>
+
+        </div>
+
+		<div class="bg-blue-200 my-5 flex flex-col items-center">
+			<h2 class="font-semibold">How to Use:</h2>
+			<p>
+				1. Klik tombol "Choose a file", lalu pilih gambar yang ingin dicari<br>
+				2. "Upload Dataset" yang akan digunakan, dengan memilih folder yang berisi gambar-gambar yang ingin dicari kemiripannya<br>
+				3. Klik "Extract_Dataset", mengeluarkan informasi di dalam dataset untuk digunakan<br>
+				4. Tunggu x detik, dengan x sekitar berapa banyak gambar dalam dataset.<br>
+				5. Klik "Search"<br>
+				6. Selesai! Klik "Prev/Next" untuk melihat semua gambar hasil
+			</p>
+		</div>
+
+		<div class="bg-blue-200 my-5 flex flex-col items-center">
+			<h2 class="font-semibold">About Us</h2>
+			<img src="/static/Image/fotokelompok.jpg" alt="Foto FK ITB" class="max-w-[600px]">
+			<div class="flex flex-row gap-5">
+				<p>
+					M. Hanief Fatkhan Nashrullah <br>
+					13522100
+				</p>
+				<p>Rafiki Prawhira Harianto <br>
+					13522065
+				</p>
+				<p>
+					Muhamad Rafli Rasyiidin <br>
+					13522088
+				</p>
+
+			</div>
+		</div>
+		
+
+
+    </div>
+</body>
+</html>
