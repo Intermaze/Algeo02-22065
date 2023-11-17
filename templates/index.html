@@ -17,8 +17,8 @@
     <div class="bg-gray-200 flex flex-col items-center my-4 font-montserrat font-medium">
 
         <div class="bg-blue-200 flex flex-row my-5 ">
-            <div class="bg-gray-300 h-96">
-                <img src="{{img}}" class="h-full">
+            <div class="bg-gray-300 h-96 transition-all max-w-0  duration-1000" id="img_div">
+                <img src="{{img}}" class="h-full" id="img">
             </div> 
             
             
@@ -28,7 +28,7 @@
                     <form action="{{ url_for('upload_file') }}" enctype="multipart/form-data" method="POST" id="uploadForm">
                       <div class="flex flex-col">
                         <div class="inline-block relative">
-                          <input class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" name="img" type="file" id="fileInput" onchange="submitForm()"/>
+                          <input class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" name="img" type="file" id="fileInput" onchange="submitInput()"/>
                           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
                             Choose a file
                           </button>
@@ -140,5 +140,10 @@
     <br>
     <p>{{extracted_notice}}</p>
     </div>
+
+    <nav class="absolute left-5 top-10 font-bold text-white">
+      <a href="/" class="bg-blue-500 p-4 rounded text-yellow-300">Home</a>
+      <a href="/about_page" class="bg-blue-600 p-4 rounded hover:text-yellow-300">About Us</a>
+    </nav>
 </body>
 </html>

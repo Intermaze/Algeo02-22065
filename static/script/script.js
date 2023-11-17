@@ -3,7 +3,7 @@ function extractFeatures() {
     form.submit();
 }
 
-function submitForm() {
+function submitInput() {
     const fileInput = document.getElementById('fileInput');
     const fileName = document.getElementById('fileName');
 
@@ -15,6 +15,7 @@ function submitForm() {
 window.onload = function() {
     if (sessionStorage.getItem('selectedFileName')) {
         document.getElementById('fileName').textContent = sessionStorage.getItem('selectedFileName');
+        document.getElementById('img_div').style.maxWidth = '1000px';
     }
 };
 
