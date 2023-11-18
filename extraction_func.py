@@ -238,7 +238,7 @@ def colorSimilarityValueAndFilename(hsvfeatures,imghist):
 
 @njit
 def rgbtograyscale(r,g,b):
-    return 0.29*r+0.587*g+0.114*b
+    return 0.299*r+0.587*g+0.114*b
 
 @njit
 def rgbtograyscale_array(array):
@@ -246,7 +246,7 @@ def rgbtograyscale_array(array):
 
 @njit
 def GCLMMat(data):
-    size = data.max()
+    size = 256
     framework = np.zeros((size,size))
     for i in range(0,len(data)):
         for j in range(0,len(data[0])-1):
@@ -305,6 +305,6 @@ def getAllCosineSimiliarity(dataset_texture_features, main_img):
     for feat in dataset_texture_features:
         similarity  = cosineSimiliarity(feat[0],main_img)
         if similarity>=0.6:
-            key.append([round(similarity*100,3),feat[1]])
+            key.append([100*similarity,feat[1]])
     key.sort(reverse=True)
     return key

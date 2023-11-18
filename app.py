@@ -42,6 +42,10 @@ def upload_dataset():
             file.save(os.path.join(app.config['DATASET'],file.filename))
     return render_template('index.html')
 
+@app.route('/about_page')
+def about_page():
+    return render_template('about_page.html')
+
 
 @app.route('/extract_features', methods=['GET', 'POST'])
 def extract_features():
@@ -73,7 +77,6 @@ def image_color_search():
     timer = round(timer,3)
     search_result = str(len(key))+" results in "+str(timer)+" seconds"
     checked = ''
-    # search_result = search_result.decode('utf-8')
     return render_template('index.html',key=key,img=img,search_result=search_result,checked=checked)
 
 @app.route('/image_texture_search', methods=['GET','POST'])
@@ -89,7 +92,6 @@ def image_texture_search():
     timer = round(timer,3)
     search_result = str(len(key))+" results in "+str(timer)+" seconds"
     checked = "checked"
-    # search_result = search_result.decode('utf-8')
     return render_template('index.html',key=key,img=img,search_result=search_result,checked=checked)
  
 if __name__ == '__main__':

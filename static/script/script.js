@@ -12,12 +12,12 @@ function submitInput() {
     document.getElementById('uploadForm').submit();
 }
 
-window.onload = function() {
-    if (sessionStorage.getItem('selectedFileName')) {
-        document.getElementById('fileName').textContent = sessionStorage.getItem('selectedFileName');
-        document.getElementById('img_div').style.maxWidth = '1000px';
-    }
-};
+
+if (sessionStorage.getItem('selectedFileName')) {
+    document.getElementById('fileName').textContent = sessionStorage.getItem('selectedFileName');
+    document.getElementById('img_div').style.maxWidth = '1000px';
+}
+
 
 function searchColorOrTexture() {
     if(document.getElementById("ColorTextureToggle").checked){
