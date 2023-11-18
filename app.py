@@ -86,7 +86,7 @@ def image_texture_search():
     start_time = time.time()
     img = os.path.join(app.config['UPLOAD'], uploadedFilename)
     imgTexture = extraction_func.getTextureFeatureFromUpload(uploadedFilename)
-    key = extraction_func.getAllCosineSimiliarity(texture_features, imgTexture)
+    key = extraction_func.normalizedFeatureAndCosine(texture_features, imgTexture)
     end_time = time.time()
     timer = end_time-start_time
     timer = round(timer,3)

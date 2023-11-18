@@ -130,8 +130,8 @@ def GCLMMat(data):
     size = 256
     framework = np.zeros((size,size))
     for i in range(0,len(data)):
-        for j in range(0,len(data[0])-1):
-            framework[data[i][j]-1][data[i][j+1]-1] += 1
+        for j in range(1,len(data[0])):
+            framework[data[i][j-1]][data[i][j]] += 1
     return framework
 
 @njit
@@ -181,11 +181,20 @@ def getTextureFeatureFromUpload(filename):
     dataset_feature = createThreeFeature(dataset_normalized_matrix)
     return dataset_feature
 
-def getAllCosineSimiliarity(dataset_texture_features, main_img):
-    key =[]
-    for feat in dataset_texture_features:
-        similarity  = cosineSimiliarity(feat[0],main_img)
+def normalizedFeatureAndCosine(feature_array, main_feature):
+    feat_arr = [i[0] for i in feature_array]
+    mean_feature_array = np.sum(feat_arr, axis=0)*(1/len(feat_arr))
+    std_feature_array = np.std(feat_arr, axis=0)
+    feat_arr = [[(i[0]-mean_feature_array[0])/std_feature_array[0],(i[1]-mean_feature_array[1])/std_feature_array[1],(i[2]-mean_feature_array[2])/std_feature_array[2]] for i in feat_arr]
+    main_feature = [(main_feature[0]-mean_feature_array[0])/std_feature_array[0], (main_feature[1]-mean_feature_array[1])/std_feature_array[1],(main_feature[2]-mean_feature_array[2])/std_feature_array[2]]
+    key = []
+    idx = 0
+    for feat in feat_arr:
+        similarity  = cosineSimiliarity(feat,main_feature)
         if similarity>=0.6:
-            key.append([100*similarity,feat[1]])
+            if similarity>1:
+                similarity = 1
+            key.append([similarity*100,feature_array[idx][1]])
+        idx += 1
     key.sort(reverse=True)
     return key
