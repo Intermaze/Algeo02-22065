@@ -102,3 +102,8 @@ README.md
 ### Pencarian Dengan Parameter Tekstur
 ![Test 3](/img/elaina3.png)
 ![Test 4](/img/elaina4.png)
+
+## Contact 
+Rafiki : 13522065@std.stei.itb.ac.id
+Rafli  : 13522088@std.stei.itb.ac.id
+Hanif  : 13522100@std.stei.itb.ac.id
