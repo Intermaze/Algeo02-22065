@@ -51,7 +51,7 @@ test/
 ├─ dataset2/
 ├─ dataset3/
 ├─ imagetest/
-docs/
+doc/
 ├─ Algeo02-22065.pdf
 img/
 ├─ elaina1.png
