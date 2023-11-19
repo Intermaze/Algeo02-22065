@@ -23,6 +23,7 @@ app.config['DATASET'] = dataset_folder
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     global uploadedFilename
+    load_features.del_uploads()
     if request.method == 'POST':
         file = request.files['img']
         try:
@@ -41,6 +42,10 @@ def upload_dataset():
         for file in files: 
             file.save(os.path.join(app.config['DATASET'],file.filename))
     return render_template('index.html')
+
+@app.route('/about_page')
+def about_page():
+    return render_template('about_page.html')
 
 
 @app.route('/extract_features', methods=['GET', 'POST'])
@@ -73,7 +78,6 @@ def image_color_search():
     timer = round(timer,3)
     search_result = str(len(key))+" results in "+str(timer)+" seconds"
     checked = ''
-    # search_result = search_result.decode('utf-8')
     return render_template('index.html',key=key,img=img,search_result=search_result,checked=checked)
 
 @app.route('/image_texture_search', methods=['GET','POST'])
@@ -83,13 +87,12 @@ def image_texture_search():
     start_time = time.time()
     img = os.path.join(app.config['UPLOAD'], uploadedFilename)
     imgTexture = extraction_func.getTextureFeatureFromUpload(uploadedFilename)
-    key = extraction_func.getAllCosineSimiliarity(texture_features, imgTexture)
+    key = extraction_func.normalizedFeatureAndCosine(texture_features, imgTexture)
     end_time = time.time()
     timer = end_time-start_time
     timer = round(timer,3)
     search_result = str(len(key))+" results in "+str(timer)+" seconds"
     checked = "checked"
-    # search_result = search_result.decode('utf-8')
     return render_template('index.html',key=key,img=img,search_result=search_result,checked=checked)
  
 if __name__ == '__main__':

@@ -23,6 +23,10 @@ def del_image():
     for item in os.listdir('static/dataset/'):
         os.remove('static/dataset/'+item)
 
+def del_uploads():
+    for item in os.listdir('static/uploads/'):
+        os.remove('static/uploads/'+item)
+
 def del_hsv():
     for item in os.listdir('dataset_features/hsv/'):
         os.remove('dataset_features/hsv/'+item)
