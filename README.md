@@ -13,7 +13,7 @@ Dalam Tugas Besar ini, digunakan parameter warna dan tekstur dalam CBIR.
 
 | NIM      | Nama                         | Tanggung Jawab                                               |
 |----------|------------------------------|--------------------------------------------------------------|
-| 13522065 | Rafiki Prawhira Harianto     | Struktur Utama Website, Design, Testing                      |
+| 13522065 | Rafiki Prawhira Harianto     | Frontend, Backend, Testing                                   |
 | 13522088 | Muhamad Rafli Rasyiidin      | CBIR Texture, Optimasi Kecepatan Algoritma Pencarian         |
 | 13522100 | M. Hanief Fatkhan Nashrullah | CBIR Color, Website Pagination, Optimasi Kecepatan Algoritma |
 
