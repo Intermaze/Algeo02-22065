@@ -52,7 +52,7 @@ def getHistogram(filename):
     blocking = 4
     Gambar = Image.open(os.path.join(path,'static/dataset/'+filename))
     Gambar = Gambar.resize((sizeReso,sizeReso))
-    hueBins = [1,25,40,120,190,270,295,315,360]
+    hueBins = [0,25,40,120,190,270,295,315,360]
     svBins = [0,0.2,0.7,1]
     arr = np.array(Gambar)
     img = np.split(arr,blocking)
@@ -71,7 +71,7 @@ def getHistogramFromUpload(filename):
     blocking = 4
     Gambar = Image.open(os.path.join(path,'static/uploads/'+filename))
     Gambar = Gambar.resize((sizeReso,sizeReso))
-    hueBins = [1,25,40,120,190,270,295,315,360]
+    hueBins = [0,25,40,120,190,270,295,315,360]
     svBins = [0,0.2,0.7,1]
     arr = np.array(Gambar)
     img = np.split(arr,blocking)
