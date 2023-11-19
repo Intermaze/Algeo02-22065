@@ -129,7 +129,7 @@
     </form> -->
     <form action = "/extract_features" method="POST" enctype="multipart/form-data">
       <div class="flex flex-col">
-        <div class="inline-block relative px-16 py-2.5 mb-4 bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-500 hover:opacity-90 rounded-xl">
+        <div class="inline-block relative px-16 py-2.5 bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-500 hover:opacity-90 rounded-xl">
       <input type="file" name="file" webkitdirectory directory multiple class=" absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="this.form.submit()" />
       <button class="rounded-full text-white font-bold">
         Upload Dataset
@@ -138,7 +138,7 @@
       </div>
     </form> 
     <br>
-    <p>{{extracted_notice}}</p>
+    <p class="bg-blue-200 flex w-1/4 h-10 items-center justify-center mb-4">{{extracted_notice}}</p>
     </div>
 
     <nav class="absolute left-5 top-10 font-bold text-white">

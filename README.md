@@ -21,7 +21,7 @@ Masuk ke directory src
 `cd src`
 
 Run programmnya
-`npm run dev`
+`npm run start`
 
 Seharusnya terlihat output seperti ini
 `* Running on http://127.0.0.1:5000`
