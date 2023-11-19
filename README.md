@@ -105,5 +105,7 @@ README.md
 
 ## Contact 
 Rafiki : 13522065@std.stei.itb.ac.id
+
 Rafli  : 13522088@std.stei.itb.ac.id
+
 Hanif  : 13522100@std.stei.itb.ac.id
