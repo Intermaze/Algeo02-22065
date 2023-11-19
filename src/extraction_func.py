@@ -162,6 +162,7 @@ def createThreeFeature(matrixNorm):     # Create contrast, homogeneity, and entr
 def getTextureFeature(filename):    
     path = os.getcwd()
     image = Image.open(os.path.join(path, 'static/dataset/'+filename))
+    image = image.resize((512,512))
     image = np.array(image)
     dataset_grayscale_matrix = np.array(rgbtograyscale_array(image))
     dataset_glcm_matrix = GCLMMat(dataset_grayscale_matrix)
@@ -173,6 +174,7 @@ def getTextureFeature(filename):
 def getTextureFeatureFromUpload(filename):
     path = os.getcwd()
     image = Image.open(os.path.join(path, 'static/uploads/'+filename))
+    image = image.resize((512,512))
     image = np.array(image)
     dataset_grayscale_matrix = np.array(rgbtograyscale_array(image))
     dataset_glcm_matrix = GCLMMat(dataset_grayscale_matrix)
