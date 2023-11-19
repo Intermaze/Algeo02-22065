@@ -23,6 +23,7 @@ app.config['DATASET'] = dataset_folder
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     global uploadedFilename
+    load_features.del_uploads()
     if request.method == 'POST':
         file = request.files['img']
         try:
