@@ -17,6 +17,9 @@ Install pula package lain
 Dalam command line, buat git clone
 `git clone https://github.com/Intermaze/Algeo02-22065`
 
+Masuk ke directory src
+`cd src`
+
 Run programmnya
 `npm run dev`
 
