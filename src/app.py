@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
+from werkzeug.wrappers import Request
 import subprocess
 import os
 import load_features
@@ -7,7 +8,8 @@ import extraction_func
 import time
  
 app = Flask(__name__)
- 
+
+Request.max_form_parts = None
 upload_folder = os.path.join('static', 'uploads')
 dataset_folder = os.path.join('static', 'dataset')
 
